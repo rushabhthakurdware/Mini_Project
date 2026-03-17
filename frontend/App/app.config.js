@@ -19,18 +19,18 @@ export default {
       "supportsTablet": true
     },
     "android": {
-      "usesCleartextTraffic": true,
-      "abiFilters": [
-        "arm64-v8a"
-      ],
+      // "usesCleartextTraffic": true,
+      // "abiFilters": [
+      //   "arm64-v8a"
+      // ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "androidStatusBar": {
-        "translucent": true
-      },
+      // "androidStatusBar": {
+      //   "translucent": true
+      // },
       "package": "com.anonymous.CivicSync",
       "config": {
         "googleMaps": {

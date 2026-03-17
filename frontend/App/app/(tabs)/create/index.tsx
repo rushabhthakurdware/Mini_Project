@@ -80,10 +80,14 @@ export default function CreateScreen() {
 
         {/* Auto Pothole Detection Modal */}
         <AutoPotholeDetection
-          visible={isAutoDetectModalVisible}
-          onClose={closeAutoDetect}
-          onMeasurementComplete={handleDepthMeasurement}
-        />
+  visible={isAutoDetectModalVisible}
+  onClose={closeAutoDetect}
+  onDetection={(imageUri, detectedClass) => {
+    console.log("Detected:", imageUri, detectedClass);
+    handleDepthMeasurement(0); // or whatever logic you want
+  }}
+  
+/>
 
         {/* 3. The MediaPicker and separators are REMOVED from here */}
 

@@ -19,7 +19,7 @@
 import dynamic from 'next/dynamic';
 
 // Dynamic import to prevent SSR issues with Leaflet
-const CityMap = dynamic(() => import('@/components/maps/CityMap'), {
+const CityMap = dynamic(() => import('@/app/maps/CityMap'), {
   ssr: false,
   loading: () => (
     <div className="h-[500px] w-full rounded-xl bg-gray-100 flex items-center justify-center">

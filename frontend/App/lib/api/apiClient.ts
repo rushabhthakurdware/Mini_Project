@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Updated to user-provided ngrok URL
-const DEFAULT_URL = 'https://unreverent-jonelle-unvehemently.ngrok-free.dev';
+const DEFAULT_URL = 'https://sticket-undelinquently-caterina.ngrok-free.dev'
 
 const apiClient = axios.create({
     baseURL: DEFAULT_URL,
@@ -48,8 +48,8 @@ export const apiService = {
     optimizeBudget: (payload: any) => apiClient.post('/optimize-budget', payload),
     estimateDamage: (payload: any) => apiClient.post('/estimate-damage', payload),
     validateReports: (payload: any) => apiClient.post('/validate-reports', payload),
-    getReports: () => apiClient.get('/data'),
-    getAllData: () => apiClient.get('/data/all'),
+    getReports: () => apiClient.get('/health'),
+    getAllData: () => apiClient.get('/health/all'),
 };
 
 export default apiClient;
