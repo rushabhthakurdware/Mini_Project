@@ -28,7 +28,20 @@ export async function createReport(
             severity_override: "moderate"
         };
 
-        const res = await apiClient.post("/analyze-complete", payload);
+const res = await apiClient.post("/analyze-issue", {
+  report: {
+    damage_severity: 0.7,
+    confidence_score: 0.8,
+    days_unresolved: 5,
+    lat: location.lat,
+    lon: location.lng
+  },
+  asset: {
+    asset_type: "road",
+    severity_level: "moderate",
+    geometry: { area_m2: 1.0 }
+  }
+});
 
         console.log("Report submitted successfully:", res.data);
 
@@ -52,35 +65,31 @@ export async function createReport(
     }
 }
 
-export async function getReports(category?: string, status?: string): Promise<Report[]> {
+export async function getReports(): Promise<Report[]> {
     try {
-        const res = await apiClient.get("/data");
-        console.log("Decision data fetched:", res.data.count);
+        const res = await apiClient.get("/health");
 
-        // Map 'decision_outputs' to 'Report' type
-        const reports: Report[] = res.data.data.map((item: any, index: number) => ({
-            _id: item.id?.toString() || index.toString(),
-            title: `Priority ${item.priority_level}`,
-            description: item.explanation || "No details provided",
-            category: "pothole", // Defaulting as category isn't in decision_outputs
-            location: {
-                lat: 0, // Location not returned in /data endpoint
-                lng: 0
-            },
+        console.log("Health response:", res.data);
+
+        return [{
+            _id: "1",
+            title: "Backend Connected",
+            description: `Status: ${res.data.status}`,
+            category: "other",
+            location: { lat: 0, lng: 0 },
             media: [],
-            status: item.selected_for_repair ? "in-progress" : "submitted",
-            createdAt: item.computed_at || new Date().toISOString(),
-            updatedAt: item.computed_at || new Date().toISOString(),
+            status: "submitted",
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
             createdByName: "System",
             createdBy: { _id: "sys", name: "System", email: "", role: "admin" }
-        }));
-
-        return reports;
+        }];
     } catch (error: any) {
         console.error("Error fetching reports:", error.response?.data || error.message);
         return [];
     }
 }
+
 
 /*not workig?? */
 export async function getReportById(reportId: string): Promise<Report[]> {

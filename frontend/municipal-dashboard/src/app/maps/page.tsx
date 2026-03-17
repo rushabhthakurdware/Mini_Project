@@ -26,7 +26,7 @@
 'use client';
 
 import AppShell from '@/components/layout/AppShell';
-import RiskMap from '@/components/maps/RiskMap';
+import RiskMap from '@/app/maps/RiskMap';
 
 export default function RiskMapPage() {
   return (
